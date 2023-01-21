@@ -135,13 +135,13 @@ Data req from Back End
 
 | Data send to Back End:  The User Form submission |
 |:------------------------------------------------:| 
-|{                                                                  
+|   {                                                                  
 |    "name": yourname, 
 |    "email": youremail, 
 |    "password": yourpassword,
 |    "occupations": occupations3,
 |   "state": {"name": "Alaska","abbreviation": "AK"}
-|}                                                   
+|    }                                                   
 
 
 
