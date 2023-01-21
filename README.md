@@ -115,26 +115,26 @@ Please make sure that this file is included in the .gitignore file so that the s
 
 For examples: 
 
-Data req from Back End                                  |  Data send to Back End:  The User Form submission                  
---------------------------------------------------------|--------------------------------------------------------------------
-                                                             {
-                                                                "name": yourname,
-                                                                "email": youremail,
+Data req from Back End                                  |  Data send to Back End:  The User Form submission                    |
+:-----------------------------------------------------: | :------------------------------------------------------------------:
+                                                             {                           |                                       
+                                                                "name": yourname, 
+                                                                "email": youremail, 
                                                                 "password": yourpassword,
                                                                 "occupations": occupations3,
                                                                 "state": {"name": "Alaska","abbreviation": "AK"}
-                                                             }
-{     |                                          
-    "occupations":[     |
-        "occupations1",    |
-        "occupations2",     |
-        "occupations3",      |
-    ],                        |
-    "states": [                |
-        {"name": "Alabama","abbreviation": "AL"},   |
-        {"name": "Alaska","abbreviation": "AK"}     |
-    ]                                               |
-}                                                   |
+                                                             }   |
+|{     |                                          
+    "occupations":[     
+        "occupations1",    
+       "occupations2",     
+       "occupations3",      
+  ],                        
+   "states": [                
+       {"name": "Alabama","abbreviation": "AL"},   
+       {"name": "Alaska","abbreviation": "AK"}     
+  ]                                               
+|}                                                   |
 
 
 
