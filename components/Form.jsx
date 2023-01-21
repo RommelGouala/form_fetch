@@ -66,7 +66,6 @@ const handleChange = (e) => {
     const [data, setData] = useState(INITIAL_STATE)
 
 
- 
 
     const handleSubmit = async (e) => {
     // prevent multiple post request

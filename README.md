@@ -109,5 +109,42 @@ You will need to create a .env file in the root directory and set the following 
 NEXT_PUBLIC_Fetch_Form_API: The url to fetch the data for the form.
 Please make sure that this file is included in the .gitignore file so that the sensitive information is not uploaded on Github.
 
+* Get request: will make a request to the backend and populate the options inside the states and occupations Select input elements.
+* Post request: send the form to the same address mentioned above "NEXT_PUBLIC_Fetch_Form_API".
+
+
+For examples: 
+                                               
+
+| Data req from Back End        |
+| ------------------------------|
+ ```bash
+ {                                              
+   "occupations":[     
+               "occupations1",    
+                "occupations2",     
+               "occupations3",      
+                                ],                        
+  "states": [                
+               {"name": "Alabama","abbreviation": "AL"},   
+                {"name": "Alaska","abbreviation": "AK"}     
+               ]                                               
+    }                            
+```
+
+
+| Data send to Back End:  The User Form submission |
+|:------------------------------------------------:| 
+  ```bash
+  {                                                                  
+    "name": yourname, 
+   "email": youremail, 
+   "password": yourpassword,
+   "occupations": occupations3,
+  "state": {"name": "Alaska","abbreviation": "AK"}
+   }   
+   ```                                                
+
+
 
 
