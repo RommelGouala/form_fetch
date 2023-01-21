@@ -120,22 +120,22 @@ Data req from Back End
 | Data req from Back End        | Data send to Back End:  The User Form submission | 
 | ------------------------------|:------------------------------------------------:| 
 | {                                              
-"occupations":[     
-"occupations1",    
-"occupations2",     
-"occupations3",      
-],                        
-"states": [                
-{"name": "Alabama","abbreviation": "AL"},   
-{"name": "Alaska","abbreviation": "AK"}     
-]                                               
-}                                  | {                                                                  
-"name": yourname, 
-"email": youremail, 
-"password": yourpassword,
-"occupations": occupations3,
-"state": {"name": "Alaska","abbreviation": "AK"}
-}    |
+    "occupations":[     
+                "occupations1",    
+                "occupations2",     
+                "occupations3",      
+                                ],                        
+    "states": [                
+                {"name": "Alabama","abbreviation": "AL"},   
+                {"name": "Alaska","abbreviation": "AK"}     
+                ]                                               
+    }                                | {                                                                  
+                                        "name": yourname, 
+                                        "email": youremail, 
+                                        "password": yourpassword,
+                                        "occupations": occupations3,
+                                        "state": {"name": "Alaska","abbreviation": "AK"}
+                                        }                                                   |
 
 
 
