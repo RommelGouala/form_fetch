@@ -37,11 +37,18 @@ const Form = () => {
     if (Fetch_Form_API_Results) {
         theStates = Fetch_Form_API_Results.states.map(states => {
             return (
-                <option key={states.name}>{states.name} {states.abbreviation}</option>
+                <option key={states.name} value={JSON.stringify({name: states.name, abbreviation: states.abbreviation})}>{states.name} {states.abbreviation}</option>
             )
         })
+}
 
-    }
+const handleChange = (e) => {
+        if(e.target.name === 'state') {
+            setData({ ...data, [e.target.name]: JSON.parse(e.target.value) })
+        } else {
+            setData({ ...data, [e.target.name]: e.target.value })
+        }
+}
     // Post Request
 
     const [Posted, isPosted] = useState(false)
@@ -52,16 +59,14 @@ const Form = () => {
         email: "",
         password: "",
         occupation: "",
-        state: ""
+        state: []
 
     }
 
     const [data, setData] = useState(INITIAL_STATE)
 
 
-    const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value })
-    }
+ 
 
     const handleSubmit = async (e) => {
     // prevent multiple post request
@@ -80,6 +85,7 @@ const Form = () => {
 
         if (response.status == 201) {
             isPosted(true)
+            console.log(data)
         }
     }
 
@@ -161,7 +167,6 @@ const Form = () => {
                         <select onChange={handleChange} className="pl-2 outline-none border-none bg-transparent text-black" type="text" name="state" value={data.state} placeholder="State" maxLength="50" minLength='3' required>
                             <option defaultValue>Choose a State</option>
                             {theStates}
-
                         </select>
                     </div>
                     <button aria-label="Sumbit button" type="submit" className=" block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Submit</button>
