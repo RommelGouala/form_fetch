@@ -115,8 +115,8 @@ Please make sure that this file is included in the .gitignore file so that the s
 
 For examples: 
 
-Data req from Back End                                  |  Data send to Back End:  The User Form submission                  |
---------------------------------------------------------|--------------------------------------------------------------------|
+Data req from Back End                                  |  Data send to Back End:  The User Form submission                  
+--------------------------------------------------------|--------------------------------------------------------------------
                                                              {
                                                                 "name": yourname,
                                                                 "email": youremail,
