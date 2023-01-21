@@ -66,7 +66,7 @@ To use the Form component, follow these steps:
 
 * Clone the repository to your local machine by running 
 ```bash 
-git clone https://github.com/YOUR-USERNAME/FetchForm.git
+git clone https://github.com/RommelGouala/form_fetch.git
 ```
 in your terminal.
 
