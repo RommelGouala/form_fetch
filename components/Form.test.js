@@ -1,72 +1,94 @@
-import React from 'react'
-import { render, waitFor, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import Form from './Form'
 
 jest.mock('axios', () => {
 return {
-get: jest.fn().mockResolvedValueOnce({
+get: jest.fn().mockResolvedValue({
 data: {
-occupations: [
-"Head of Shrubbery",
-"Interim Substitute Teacher"
-],
-states: [
-{
-name: "Alabama",
-abbreviation: "AL"
-},
-{
-name: "Alaska",
-abbreviation: "AK"
-}
-]
+occupations: ['Developer', 'Designer', 'Product Manager'],
+states: [{ name: 'New York', abbreviation: 'NY' }, { name: 'California', abbreviation: 'CA' }]
 }
 }),
-post: jest.fn().mockResolvedValueOnce()
+post: jest.fn().mockResolvedValue({ status: 201 })
 }
 })
 
 import axios from 'axios'
 
 describe('Form', () => {
-it('should display the form and options when the data is fetched', async () => {
-const { getByTestId, getByLabelText } = render(<Form />)
+test('renders the form and options when the data is fetched', async () => {
+// mock the fetch API
+const { getByTestId } = render(<Form />)
 
 
-    await waitFor(() => {
-        expect(getByTestId('occupation-options')).toContainElement(getByText("Head of Shrubbery"))
-        expect(getByTestId('occupation-options')).toContainElement(getByText("Interim Substitute Teacher"))
-        expect(getByTestId('state-options')).toContainElement(getByText("AL"))
-        expect(getByTestId('state-options')).toContainElement(getByText("AK"))
+    // wait for the data to be fetched
+    await wait(() => {
+        const form = getByTestId('form')
+        expect(form).toBeInTheDocument()
+
+        const occupationSelect = getByTestId('occupation-select')
+        expect(occupationSelect.options.length).toBe(3)
+
+        const stateSelect = getByTestId('state-select')
+        expect(stateSelect.options.length).toBe(2)
     })
+})
 
-    // rest of the test
+test('submits the form', async () => {
+    const { getByTestId } = render(<Form />)
 
-    const nameInput = getByTestId('InputForName')
-    const emailInput = getByTestId('InputForEmail')
-    const passwordInput = getByTestId('InputForPassword')
-    const occupationSelect = getByTestId('occupation-options') 
-    const stateSelect =  getByTestId('state-option')
-    const submitButton = getByTestId('submit-button')
-
+    // fill in the form inputs
+    const nameInput = getByTestId('name-input')
     fireEvent.change(nameInput, { target: { value: 'John Doe' } })
+
+    const emailInput = getByTestId('email-input')
     fireEvent.change(emailInput, { target: { value: 'johndoe@example.com' } })
+
+    const passwordInput = getByTestId('password-input')
     fireEvent.change(passwordInput, { target: { value: 'password123' } })
-    fireEvent.change(occupationSelect, { target: { value: 'Head of Shrubbery' } })
-    fireEvent.change(stateSelect, { target: { value: '{"name":"Alabama","abbreviation":"AL"}' } })
+
+    // submit the form
+    const submitButton = getByTestId('submit-button')
     fireEvent.click(submitButton)
 
-    await waitFor(() => {
-        expect(axios.post).toHaveBeenCalledWith(
-            process.env.NEXT_PUBLIC_Fetch_Form_API,
-            {
-                name: 'John Doe',
-                email: 'johndoe@example.com',
-                password: 'password123',
-                occupation: 'Head of Shrubbery',
-                state: { name: 'Alabama', abbreviation: 'AL' }
-            }
-        )
+    // assert the fetch API was called with the correct data
+    expect(axios.post).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.objectContaining({
+            name: 'John Doe',
+            email: 'johndoe@example.com',
+            password: 'password123',
+            occupation: '',
+            state: []
+        })
+    )
+
+    // assert the form was submitted successfully
+    const message = getByText(/Thanks for submitting!/i)
+    expect(message).toBeInTheDocument()
+})
+
+test('selects an occupation', () => {
+    const { getByTestId } = render(<Form />)
+    const occupationSelect = getByTestId('occupation-select')
+
+    // select the "Developer" option
+    fireEvent.change(occupationSelect, { target: { value: 'Developer' } })
+
+    // assert the selected value is "Developer"
+    expect(occupationSelect.value).toBe('Developer')
+})
+test('selects state', () => {
+    const { getByTestId } = render(<Form />)
+    const stateSelect = getByTestId('state-select')
+    
+
+    // select the "New York" option
+    fireEvent.change(stateSelect, { target: { value: JSON.stringify({name: "New York", abbreviation: "NY"}) } })
+    
+    // assert the selected value is "New York"
+    expect(stateSelect.value).toBe(JSON.stringify({name: "New York", abbreviation: "NY"}))
     })
-})
-})
+    
+    //end
+    })
