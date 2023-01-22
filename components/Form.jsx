@@ -6,6 +6,7 @@ import axios from "axios";
 
 
 
+
 const Form = () => {
 
     const Url = process.env.NEXT_PUBLIC_Fetch_Form_API
@@ -13,7 +14,7 @@ const Form = () => {
 
 //    Get Request 
 
-    useEffect(() => {
+useEffect(() => {
 
         axios.get(Url,)
             .then(response => {
